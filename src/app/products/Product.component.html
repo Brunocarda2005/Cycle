@@ -1,0 +1,221 @@
+<section class="app__products {{ CreateOn }}">
+  <p-dataView
+    #dv
+    [value]="products"
+    [rows]="5"
+    [paginator]="true"
+    [layout]="layout"
+  >
+    <ng-template pTemplate="header">
+      <section class="app__products__header__nav">
+        <div class="flex justify-content-center layout">
+          <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
+        </div>
+        <p-autoComplete
+          (onSelect)="onSelect($event)"
+          (input)="onInput($event)"
+          [(ngModel)]="selectedProduct"
+          [forceSelection]="true"
+          [suggestions]="filteredProducts"
+          (completeMethod)="filterProduct($event)"
+          field="title"
+          class="autocomplete"
+          [inputStyle]="{ width: '100%' }"
+        >
+          <ng-template let-title pTemplate="item">
+            {{ truncateTitle(title, 20) }}
+            <!-- Llama a la función truncateTitle con el título y la longitud máxima -->
+          </ng-template>
+        </p-autoComplete>
+        <button
+          id="butonAdd"
+          Class="button border-none outline-none w-[100%] flex gap-2"
+          (click)="onClickCreate()"
+        >
+          <span class="pi pi-plus"></span>
+          <span>Create</span>
+        </button>
+      </section>
+    </ng-template>
+
+    <ng-template let-products pTemplate="list">
+      <div class="products grid grid-nogutter">
+        <div class="col-12" *ngFor="let item of products; let first = first">
+          <div
+            class="products__content"
+            [ngClass]="{ 'border-top-1 surface-border': !first }"
+          >
+            <img class="img" [src]="item.image" [alt]="item.title" />
+            <div class="products__content__text">
+              <div
+                class="flex flex-column align-items-center sm:align-items-start gap-3"
+              >
+                <div class="text text-2xl font-bold text-900">
+                  {{ truncateTitle(item.title, 10) }}
+                  <p class="description">
+                    {{ truncateTitle(item.description, 60) }}
+                  </p>
+                </div>
+                <div class="flex align-items-center gap-3">
+                  <span class="flex align-items-center gap-2">
+                    <i class="pi pi-tag"></i>
+                    <span class="font-semibold">{{ item.category }}</span>
+                  </span>
+                  <div class="ChangeProduct flex gap-2">
+                    <p-toast
+                      [breakpoints]="{
+                        '920px': { width: '100%', right: '0', left: '0' }
+                      }"
+                    ></p-toast>
+                    <button
+                      [id]="item.id"
+                      class="button delete"
+                      (click)="delete($event)"
+                    >
+                      <span
+                        class="button__icon pi pi-trash"
+                        style="font-size: 1rem; color: rgb(255, 255, 255)"
+                        [id]="item.id"
+                      ></span>
+                    </button>
+                    <button
+                      [id]="item.id"
+                      class="button update"
+                      (click)="update($event)"
+                    >
+                      <span
+                        class="button__icon pi pi-replay"
+                        style="font-size: 1rem; color: rgb(255, 255, 255)"
+                        [id]="item.id"
+                      ></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="price flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"
+              >
+                <span class="text-2xl font-semibold">{{
+                  "$" + item.price
+                }}</span>
+                <button
+                  pButton
+                  icon="pi pi-shopping-cart"
+                  class="md:align-self-end mb-2 p-button-rounded"
+                  [disabled]="item.inventoryStatus === 'OUTOFSTOCK'"
+                ></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template let-product pTemplate="grid" let-products>
+      <div class="products grid grid-nogutter">
+        <div
+          class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2"
+          *ngFor="let item of products; let first = first"
+        >
+          <div class="p-4 border-1 surface-border surface-card border-round">
+            <div
+              class="flex flex-wrap align-items-center justify-content-between gap-2"
+            >
+              <span class="flex align-items-center gap-2">
+                <i class="pi pi-tag"></i>
+                <span class="font-semibold">{{ item.category }}</span>
+              </span>
+            </div>
+            <div class="flex flex-column align-items-center gap-3 py-5">
+              <img
+                class="w-9 shadow-2 border-round"
+                class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
+                [src]="item.image"
+                [alt]="item.title"
+              />
+              <div class="text-2xl font-bold">{{ item.title }}</div>
+              <p-rating
+                [ngModel]="item.rating"
+                [readonly]="true"
+                [cancel]="false"
+              ></p-rating>
+            </div>
+            <div
+              class="ChangeProduct_content flex align-items-center justify-content-between"
+            >
+              <div class="ChangeProduct-gridState">
+                <span class="ChangeProduct-gridState__price font-semibold">{{
+                  "$" + item.price
+                }}</span>
+                <button
+                  [id]="item.id"
+                  class="button delete gridState"
+                  (click)="delete($event)"
+                >
+                  <span
+                    class="button__icon pi pi-trash"
+                    style="font-size: 1rem"
+                    [id]="item.id"
+                  ></span>
+                </button>
+                <button
+                  [id]="item.id"
+                  class="button update gridState"
+                  (click)="update($event)"
+                >
+                  <span
+                    class="button__icon pi pi-replay"
+                    style="font-size: 1rem"
+                    [id]="item.id"
+                  ></span>
+                </button>
+              </div>
+              <button
+                pButton
+                icon="pi pi-shopping-cart"
+                class="p-button-rounded"
+                [disabled]="item.inventoryStatus === 'OUTOFSTOCK'"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+
+  <section *ngIf="CreateOn" class="app__products__create">
+    <div class="app__products__create__content">
+      <header class="app__products__create__content__header">
+        <h3>Detalle de Producto</h3>
+        <p-button
+          icon="pi pi-times"
+          [rounded]="true"
+          [text]="true"
+          severity="danger"
+          (click)="onClickCreate()"
+        ></p-button>
+      </header>
+      <app-create
+        [products]="products"
+        (enviar)="recibirNewProduct($event)"
+      ></app-create>
+    </div>
+  </section>
+  <section *ngIf="UpdateOn" class="app__products__create">
+    <div class="app__products__create__content">
+      <header class="app__products__create__content__header">
+        <h3>Edit de Producto</h3>
+        <p-button
+          icon="pi pi-times"
+          [rounded]="true"
+          [text]="true"
+          severity="danger"
+          (click)="onClickUpdate()"
+        ></p-button>
+      </header>
+      <app-uptdate
+        [inputData]="{ products: products, updateProduct: updateProduct }"
+        (enviar)="recibirNewProduct($event)"
+      ></app-uptdate>
+    </div>
+  </section>
+</section>

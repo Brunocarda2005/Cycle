@@ -1,0 +1,10 @@
+.app__header {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .app__header__title {
+    padding-left: 0.5rem;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,43 @@
+
+.app__products__create__content__content-image {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.app__products__create__content__content-chek-info__content {
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.app__products__create__content__content-price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 1rem 0;
+}
+
+.app__products__create__content__content-send {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+}
+
+.app__products__create__content__content-input {
+  .name {
+    margin-bottom: 1.5rem;
+  }
+  .input {
+    width: 100%;
+    max-width: 20rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .app__products__create__content__content-chek-info__content {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

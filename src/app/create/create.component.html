@@ -1,0 +1,93 @@
+<form id="form">
+  <aside class="app__products__create__content__content-input">
+    <span class="p-float-label name">
+      <input
+        class="app__products__create__content__content-input__name input"
+        pInputText
+        id="username"
+        [(ngModel)]="value"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <label for="username">name</label>
+    </span>
+    <span class="p-float-label">
+      <textarea
+        id="float-input"
+        rows="5"
+        cols="25"
+        pInputTextarea
+        [autoResize]="true"
+        class="app__products__create__content__content-input__description input"
+      ></textarea>
+      <label for="float-input">Description</label>
+    </span>
+  </aside>
+  <aside class="app__products__create__content__content-image">
+    <span>Image</span>
+    <p-toast></p-toast>
+    <p-fileUpload
+      mode="basic"
+      chooseLabel="Image"
+      name="demo[]"
+      url="https://www.primefaces.org/cdn/api/upload.php"
+      accept="image/*"
+      maxFileSize="1000000"
+      (onUpload)="onUpload($event)"
+    ></p-fileUpload>
+  </aside>
+  <aside class="app__products__create__content__content-chek-info">
+    <span>Categorias</span>
+    <div class="app__products__create__content__content-chek-info__content">
+      <p-checkbox
+        name="groupname"
+        value="Accessories"
+        label="Accessories"
+        [(ngModel)]="selectedValues"
+      ></p-checkbox>
+      <p-checkbox
+        name="groupname"
+        value="Clothing"
+        label="Clothing"
+        [(ngModel)]="selectedValues"
+      ></p-checkbox>
+      <p-checkbox
+        name="groupname"
+        value="Electronics"
+        label="Electronics"
+        [(ngModel)]="selectedValues"
+      ></p-checkbox>
+      <p-checkbox
+        name="groupname"
+        value="Fitness"
+        label="Fitness"
+        [(ngModel)]="selectedValues"
+      ></p-checkbox>
+    </div>
+  </aside>
+  <aside class="app__products__create__content__content-price">
+    <span>Price</span>
+    <p-inputNumber
+      [(ngModel)]="price"
+      inputId="minmaxfraction"
+      mode="decimal"
+      [minFractionDigits]="2"
+      [maxFractionDigits]="5"
+      [ngModelOptions]="{ standalone: true }"
+    >
+    </p-inputNumber>
+  </aside>
+  <footer class="app__products__create__content__content-send">
+    <p-button
+      icon="pi pi-check"
+      label="Confirm"
+      [outlined]="true"
+      (click)="onClickCreate()"
+    ></p-button>
+    <p-button
+      label="Cancel"
+      icon="pi pi-times"
+      [outlined]="true"
+      severity="danger"
+    ></p-button>
+  </footer>
+</form>
