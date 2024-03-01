@@ -29,7 +29,7 @@
         </p-autoComplete>
         <button
           id="butonAdd"
-          Class="button border-none outline-none w-[100%] flex gap-2"
+          Class="button update"
           (click)="onClickCreate()"
         >
           <span class="pi pi-plus"></span>
@@ -45,7 +45,7 @@
             class="products__content"
             [ngClass]="{ 'border-top-1 surface-border': !first }"
           >
-            <img class="img" [src]="item.image" [alt]="item.title" />
+            <img class="img h-[5rem]" [src]="item.image" [alt]="item.title" />
             <div class="products__content__text">
               <div
                 class="flex flex-column align-items-center sm:align-items-start gap-3"
