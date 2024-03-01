@@ -66,7 +66,7 @@
                   <div class="ChangeProduct flex gap-2">
                     <p-toast
                       [breakpoints]="{
-                        '920px': { width: '60%', right: '5'}
+                        '920px': { width: '60%', right: '5' }
                       }"
                     ></p-toast>
                     <button
@@ -118,7 +118,9 @@
           class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2"
           *ngFor="let item of products; let first = first"
         >
-          <div class="product-grid p-4 border-1 surface-border surface-card border-round">
+          <div
+            class="product-grid p-4 border-1 surface-border surface-card border-round"
+          >
             <div
               class="flex flex-wrap align-items-center justify-content-between gap-2"
             >
@@ -128,13 +130,11 @@
               </span>
             </div>
             <div class="flex flex-column align-items-center gap-3 py-5">
-              <img
-                class="w-9 shadow-2 border-round"
-                class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
-                [src]="item.image"
-                [alt]="item.title"
-              />
-              <div class="text-2xl font-bold">{{ item.title }}</div>
+              <img class="img" [src]="item.image" [alt]="item.title" />
+              <div class="text-2xl font-bold">
+                {{ truncateTitle(item.title, 15) }}
+                <!-- Llamar a la función truncateTitle con el título y la longitud máxima -->
+              </div>
               <p-rating
                 [ngModel]="item.rating"
                 [readonly]="true"
