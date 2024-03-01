@@ -24,7 +24,7 @@
         >
           <ng-template let-title pTemplate="item">
             {{ truncateTitle(title, 20) }}
-            <!-- Llama a la función truncateTitle con el título y la longitud máxima -->
+            <!-- Llamar a la función truncateTitle con el título y la longitud máxima -->
           </ng-template>
         </p-autoComplete>
         <button
@@ -52,8 +52,10 @@
               >
                 <div class="text text-2xl font-bold text-900">
                   {{ truncateTitle(item.title, 10) }}
+                  <!-- Llamar a la función truncateTitle con el título y la longitud máxima -->
                   <p class="description">
                     {{ truncateTitle(item.description, 60) }}
+                    <!-- Llamar a la función truncateTitle con el título y la longitud máxima -->
                   </p>
                 </div>
                 <div class="flex align-items-center gap-3">
@@ -64,7 +66,7 @@
                   <div class="ChangeProduct flex gap-2">
                     <p-toast
                       [breakpoints]="{
-                        '920px': { width: '100%', right: '0', left: '0' }
+                        '920px': { width: '60%', right: '5'}
                       }"
                     ></p-toast>
                     <button
@@ -116,7 +118,7 @@
           class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2"
           *ngFor="let item of products; let first = first"
         >
-          <div class="p-4 border-1 surface-border surface-card border-round">
+          <div class="product-grid p-4 border-1 surface-border surface-card border-round">
             <div
               class="flex flex-wrap align-items-center justify-content-between gap-2"
             >

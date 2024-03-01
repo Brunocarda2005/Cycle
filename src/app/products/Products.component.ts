@@ -1,27 +1,27 @@
-import { Component } from "@angular/core";
-import { Product } from "../../domain/product";
-import { ProductService } from "../../service/productservice";
-import { DataViewModule } from "primeng/dataview";
-import { CommonModule } from "@angular/common";
-import { RatingModule } from "primeng/rating";
-import { TagModule } from "primeng/tag";
-import { FormsModule } from "@angular/forms";
-import { AutoCompleteModule } from "primeng/autocomplete";
-import { ButtonModule } from "primeng/button";
-import { FormGroup } from "@angular/forms";
-import { InputTextModule } from "primeng/inputtext";
-import { CheckboxModule } from "primeng/checkbox";
-import { FileUploadModule } from "primeng/fileupload";
-import { InputTextareaModule } from "primeng/inputtextarea";
-import { InputNumberModule } from "primeng/inputnumber";
-import { CreateComponent } from "../create/create.component";
-import { MessageService } from "primeng/api";
-import { SplitButtonModule } from "primeng/splitbutton";
-import { ToastModule } from "primeng/toast";
-import { UpdateComponent } from "../update/update.component";
+import { Component } from '@angular/core';
+import { Product } from '../../domain/product';
+import { ProductService } from '../../service/productservice';
+import { DataViewModule } from 'primeng/dataview';
+import { CommonModule } from '@angular/common';
+import { RatingModule } from 'primeng/rating';
+import { TagModule } from 'primeng/tag';
+import { FormsModule } from '@angular/forms';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ButtonModule } from 'primeng/button';
+import { FormGroup } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { FileUploadModule } from 'primeng/fileupload';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { CreateComponent } from '../create/create.component';
+import { MessageService } from 'primeng/api';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { ToastModule } from 'primeng/toast';
+import { UpdateComponent } from '../update/update.component';
 
 @Component({
-  selector: "app-products",
+  selector: 'app-products',
   standalone: true,
   imports: [
     DataViewModule,
@@ -42,13 +42,14 @@ import { UpdateComponent } from "../update/update.component";
     CheckboxModule,
     InputTextModule,
   ],
-  templateUrl: "./Product.component.html",
-  styleUrl: "./Products.component.scss",
+  templateUrl: './Product.component.html',
+  styleUrl: './Products.component.scss',
   providers: [MessageService],
 })
 export class ProductsComponent {
   // lista de productos
   products: Product[];
+
 
   // nuevo producto
   newProduct: Array<Object> = [];
@@ -63,7 +64,7 @@ export class ProductsComponent {
   serchProduct: any[];
 
   // layout list | grid
-  layout: string = "list";
+  layout: string = 'list';
 
   // producto seleccionado en el input serch
   selectedProduct: {};
@@ -88,7 +89,7 @@ export class ProductsComponent {
   // aparece el create
   save() {
     this.CreateOn = !this.CreateOn;
-    document.body.style.overflow = this.CreateOn ? "hidden" : "auto";
+    document.body.style.overflow = this.CreateOn ? 'hidden' : 'auto';
   }
 
   // aparece el update
@@ -97,7 +98,7 @@ export class ProductsComponent {
 
     window.scrollTo(0, 0);
     this.UpdateOn = !this.UpdateOn;
-    document.body.style.overflow = this.UpdateOn ? "hidden" : "auto";
+    document.body.style.overflow = this.UpdateOn ? 'hidden' : 'auto';
 
     for (let i = 0; i < this.products.length; i++) {
       if (parseInt(this.products[i].id) === id) {
@@ -111,9 +112,9 @@ export class ProductsComponent {
     const idToDelete: string = event.target.id;
 
     this.messageService.add({
-      severity: "warn",
-      summary: "Delete",
-      detail: "Product Deleted",
+      severity: 'warn',
+      summary: 'Delete',
+      detail: 'Product Deleted',
     });
 
     this.products = this.products.filter(
@@ -152,7 +153,7 @@ export class ProductsComponent {
   // hace que el texto que le pases no sea mas largo que tantos caracteres
   truncateTitle(data: any, maxLength: number): string {
     if (data.length > maxLength) {
-      return data.substring(0, maxLength) + "..."; // Truncar y agregar puntos suspensivos
+      return data.substring(0, maxLength) + '...'; // Truncar y agregar puntos suspensivos
     }
 
     return data;
@@ -186,7 +187,7 @@ export class ProductsComponent {
   onClickUpdate() {
     // seccion que abre update
     this.UpdateOn = !this.UpdateOn;
-    document.body.style.overflow = this.UpdateOn ? "hidden" : "auto";
+    document.body.style.overflow = this.UpdateOn ? 'hidden' : 'auto';
 
     // seccion que agrega los nuevos productos al producto original
     if (!this.UpdateOn && this.newProduct.length != 0) {
