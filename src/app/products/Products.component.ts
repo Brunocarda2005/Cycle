@@ -142,7 +142,7 @@ export class ProductsComponent {
     for (let i = 0; i < this.serchProduct.length; i++) {
       let product = this.serchProduct[i];
       if (product.title.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(product);
+        filtered.push(product.title);
       }
     }
 
