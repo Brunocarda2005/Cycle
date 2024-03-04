@@ -136,18 +136,24 @@ export class ProductsComponent {
 
   // filtrador
   filterProduct(event: any) {
-    let filtered: any[] = [];
-    let query = event.query;
+    let filtered: any[] = []; // list de title
+    let query = event.query; // tecla clicada
+    let productsFilter: any[] = []; // lista con productos
 
+
+    // buscador
     for (let i = 0; i < this.serchProduct.length; i++) {
       let product = this.serchProduct[i];
       if (product.title.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(product);
+        filtered.push(product.title);
+        productsFilter.push(product);
       }
     }
 
+    // asignacion de variables
     this.filteredProducts = filtered;
-    this.products = filtered.length > 0 ? filtered : this.originalProducts;
+    this.products =
+      filtered.length > 0 ? productsFilter : this.originalProducts;
   }
 
   // hace que el texto que le pases no sea mas largo que tantos caracteres
